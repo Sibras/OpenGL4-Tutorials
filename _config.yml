@@ -1,1 +1,22 @@
-theme: jekyll-theme-slate
+remote_theme: pmarsceill/just-the-docs
+
+title:            OpenGL4 Tutorials
+tagline:          OpenGL 3/4 Tutorials
+description:      "A set of tutorials covering basic OpenGL creation through to more advanced topics such as shadow maps, deferred rendering, volume lighting and tessellation"
+url:              "https://sibras.github.io"
+baseurl:          "/OpenGL4-Tutorials"
+
+author:
+  name:           'Matthew Oliver'
+
+search_enabled: false
+
+permalink: pretty
+exclude: ["node_modules/", "*.gemspec", "*.gem", "Gemfile", "Gemfile.lock", "package.json", "package-lock.json",  "script/", "LICENSE.txt", "lib/", "bin/", "README.md", "Rakefile"
+, "docs/tests/"
+]
+
+back_to_top: true
+back_to_top_text: "Back to top"
+
+footer_content: "Copyright &copy; 2016-2021 Matthew Oliver. Distributed by an <a href=\"https://github.com/sibras/OpenGL4-Tutorials/tree/main/LICENSE.txt\">GFDL license.</a>"
