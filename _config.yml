@@ -19,7 +19,7 @@ exclude: ["node_modules/", "*.gemspec", "*.gem", "Gemfile", "Gemfile.lock", "pac
 back_to_top: true
 back_to_top_text: "Back to top"
 
-footer_content: "Copyright &copy; 2016-2021 Matthew Oliver. Distributed by an <a href=\"https://github.com/sibras/OpenGL4-Tutorials/tree/main/LICENSE.txt\">GFDL license.</a>"
+footer_content: "Copyright &copy; 2016-2021 Matthew Oliver. Distributed by an <a href=\"https://github.com/sibras/OpenGL4-Tutorials/tree/gh-pages/LICENSE.txt\">GFDL license.</a>"
 
 aux_links:
   "OpenGL Tutorials on GitHub":
