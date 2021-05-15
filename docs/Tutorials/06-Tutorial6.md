@@ -6,3 +6,5 @@ nav_order: 6
 ---
 
 <embed src="{{ site.baseurl }}/pdfs/Tutorial%206%20-%20Texture%20Effects.pdf" type="application/pdf" width="100%" height="850px" />
+
+[Tutorial Solutions](https://github.com/sibras/OpenGL4-Tutorials)
