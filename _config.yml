@@ -1,4 +1,7 @@
 remote_theme: pmarsceill/just-the-docs
+markdown: kramdown
+kramdown:
+    math_engine: katex
 
 title:            OpenGL4 Tutorials
 tagline:          OpenGL 3/4 Tutorials

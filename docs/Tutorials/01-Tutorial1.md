@@ -39,7 +39,7 @@ as keyboard/mouse/controller input, basic sound and others.
     [https://www.libsdl.org/download-2.0.php](https://www.libsdl.org/download-2.0.php)
 
 2.  Extract the SDL2 include folder into a location accessible by your code.
-    Also extract the `SDL2` library/binary (ignore SDLtest and SDLmain as they
+    Also extract the "SDL2" library/binary (ignore SDLtest and SDLmain as they
     are not needed) and place that in an accessible location as well.
 
 OpenGL has had many versions since its inception, each of these versions has
@@ -49,7 +49,7 @@ used. This can cause an issue as not every OS has up to date OpenGL available,
 although the GL functions may be supported by the graphics card and driver, they
 are not always directly exposed to a program. Windows is of particular note as
 it only provides OpenGL 1 support natively. In order to ensure that all OpenGL
-functions are available on all OS’s the `GL Extension Wrangler` (GLEW) can be
+functions are available on all OS’s the "GL Extension Wrangler" (GLEW) can be
 used to find and expose all available GL functions.
 
 {:style="counter-reset: step-counter 2;"}
@@ -60,12 +60,12 @@ used to find and expose all available GL functions.
 GLEW provides 2 different library implementations; the first is the standard
 version while the second (postfixed with MX) provides support for multiple
 rendering contexts. Since for this and all future tutorials we will not be using
-multiple render contexts only the standard static `glew32s` library needs to be
+multiple render contexts only the standard static "glew32s" library needs to be
 extracted.
 
 {:style="counter-reset: step-counter 3;"}
 4.  Extract the GLEW include folder into a location accessible by your code (can
-    be merged with the same include folder as SDL). Also extract the `glew32s`
+    be merged with the same include folder as SDL). Also extract the "glew32s"
     library.
 
 ## Part 2: Creating a window
@@ -202,7 +202,7 @@ if (Context == NULL) {
 
 Vertical Synchronization (VSync) can be used to prevent frame tearing by
 ensuring that each buffer of the requested double-buffer is only presented to
-the screen during a `vertical refresh`. This prevents updating the contents of
+the screen during a "vertical refresh". This prevents updating the contents of
 the buffer being presented to the screen while it is still being used. This is
 the cause of frame tearing as the screen ends up displaying the first part of
 the original buffer contents and then the remainder of the screen gets replaced
@@ -1041,9 +1041,9 @@ window width/height instead of using the constants as done previously.
 
 {:style="counter-reset: step-counter 43;"}
 44.  Creating OpenGL shaders directly in a string is cumbersome and hard to read.
-    A cleaner way would be to create a separate `.glsl` shader file for each
+    A cleaner way would be to create a separate ".glsl" shader file for each
     shader and then read it into a string instead. Modify your program so that
-    the shader code is in separate `.glsl` files that are loaded from file.
+    the shader code is in separate ".glsl" files that are loaded from file.
 
 {:refdef: style="text-align: center;"}
 ![]({{ site.baseurl }}/assets/images/fe8f60131b3405f02ce713cdb1920562.png)
