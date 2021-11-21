@@ -558,7 +558,7 @@ glGenerateMipmap(GL_TEXTURE_2D);
 Many rendering and post-processing operations require using a spatial
 integral. This is often performed by applying a filter kernel over all
 pixels. If the filter kernel is independent of pixel location then the
-filter is considered ``spatial-invariant''. An often used
+filter is considered "spatial-invariant". An often used
 spatial-invariant filter function is the 2D Gaussian filter with
 variance $$\sigma^{2}$$ as denoted by:
 
@@ -576,7 +576,7 @@ number of samples now only being $$2n$$.
 
 The number of required samples can be reduced by using importance
 sampling instead of sampling the integration domain uniformly. The
-standard Gaussian filter has a `bell' like shape where samples toward
+standard Gaussian filter has a `bell` like shape where samples toward
 the centre are given higher weights than those near the edges. Since
 those samples near the outside of the filter region will have very low
 contribution to the final value they can be easily ignored. Importance
