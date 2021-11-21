@@ -29,3 +29,5 @@ aux_links:
     - "//github.com/sibras/OpenGL4-Tutorials"
 
 aux_links_new_tab: true
+
+color_scheme: dark
