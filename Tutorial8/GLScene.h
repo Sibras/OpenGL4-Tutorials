@@ -5,7 +5,6 @@
 #include <math.h>
 #include <glm/glm.hpp>
 #include <glm/gtx/type_aligned.hpp>
-#define GLEW_STATIC
 #include <GL/glew.h>
 
 using namespace glm;

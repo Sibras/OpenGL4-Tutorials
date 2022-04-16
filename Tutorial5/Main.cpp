@@ -3,9 +3,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 // Using SDL, GLEW
-#define GLEW_STATIC
 #include <GL/glew.h>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
@@ -63,12 +62,12 @@ bool GL_Init()
 
     // Create vertex shader
     GLuint uiVertexShader;
-    if (!GL_LoadShaderFile(uiVertexShader, GL_VERTEX_SHADER, "TransformPhongVert.glsl", 100))
+    if (!GL_LoadShaderFile(uiVertexShader, GL_VERTEX_SHADER, "Tutorial4Vert.glsl", 100))
         return false;
 
     // Create fragment shader
     GLuint uiFragmentShader;
-    if (!GL_LoadShaderFile(uiFragmentShader, GL_FRAGMENT_SHADER, "PhongFrag.glsl", 200))
+    if (!GL_LoadShaderFile(uiFragmentShader, GL_FRAGMENT_SHADER, "Tutorial4Frag.glsl", 200))
         return false;
 
     // Create program

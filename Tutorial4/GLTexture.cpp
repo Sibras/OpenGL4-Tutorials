@@ -1,11 +1,9 @@
 // Using SDL, SDL OpenGL, GLEW
 #include <math.h>
-#define GLEW_STATIC
-#include <GL\glew.h>
-#include <SDL.h>
-#include <SDL_opengl.h>
+#include <GL/glew.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_opengl.h>
 // Using KTX import
-#define KTX_OPENGL 1
 #include <ktx.h>
 
 bool GL_LoadTextureBMP(GLuint uiTexture, const char * p_cTextureFile)
@@ -75,17 +73,26 @@ bool GL_LoadTextureBMP(GLuint uiTexture, const char * p_cTextureFile)
 bool GL_LoadTextureKTX(GLuint uiTexture, const char * p_cTextureFile)
 {
     // Load texture data
-    GLenum GLTarget, GLError;
-    GLboolean bIsMipmapped;
-    KTX_error_code ktxerror = ktxLoadTextureN(p_cTextureFile, &uiTexture, &GLTarget, NULL, &bIsMipmapped, &GLError, 0, NULL);
+    ktxTexture* kTexture;
+    KTX_error_code ktxerror = ktxTexture_CreateFromNamedFile(p_cTextureFile,
+        KTX_TEXTURE_CREATE_NO_FLAGS,
+        &kTexture);
     if (ktxerror != KTX_SUCCESS) {
         SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION, "Failed to read texture file: %s (%s)\n", p_cTextureFile, ktxErrorString(ktxerror));
         return false;
     }
+    GLenum GLTarget, GLError;
+    ktxerror = ktxTexture_GLUpload(kTexture, &uiTexture, &GLTarget, &GLError);
+    if (ktxerror != KTX_SUCCESS) {
+        SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION, "Failed to upload texture file: %s\n", ktxErrorString(ktxerror));
+        return false;
+    }
 
     // Generate mipmaps
-    if (!bIsMipmapped)
+    if (kTexture->numLevels == 1)
         glGenerateMipmap(GL_TEXTURE_2D);
+
+    ktxTexture_Destroy(kTexture);
 
     // Initialise the texture filtering values
     //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -98,23 +105,23 @@ bool GL_LoadTextureKTX(GLuint uiTexture, const char * p_cTextureFile)
 }
 
 // Using GLI
-#include <gli/gli.hpp>
-bool GL_ConvertDDS2KTX(const char * p_cTextureFile)
-{
-    // Load texture data
-    gli::texture Texture(gli::load_dds(p_cTextureFile));
-    if (Texture.empty()) {
-        SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION, "Failed to open texture file: %s\n", p_cTextureFile);
-        return false;
-    }
-    const char * p_cKTXExt = ".ktx";
-    const unsigned uiInLength = strlen(p_cTextureFile) - 4;
-    char * p_cOutFile = (char *)malloc(uiInLength + 4 + 1);
-    memcpy(p_cOutFile, p_cTextureFile, uiInLength);
-    memcpy(p_cOutFile + uiInLength, p_cKTXExt, 5);
-    if (!gli::save_ktx(Texture, p_cOutFile)) {
-        SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION, "Failed to write texture file: %s\n", p_cOutFile);
-        return false;
-    }
-    return true;
-}
+//#include <gli/gli.hpp>
+//bool GL_ConvertDDS2KTX(const char * p_cTextureFile)
+//{
+//    // Load texture data
+//    gli::texture Texture(gli::load_dds(p_cTextureFile));
+//    if (Texture.empty()) {
+//        SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION, "Failed to open texture file: %s\n", p_cTextureFile);
+//        return false;
+//    }
+//    const char * p_cKTXExt = ".ktx";
+//    const unsigned uiInLength = strlen(p_cTextureFile) - 4;
+//    char * p_cOutFile = (char *)malloc(uiInLength + 4 + 1);
+//    memcpy(p_cOutFile, p_cTextureFile, uiInLength);
+//    memcpy(p_cOutFile + uiInLength, p_cKTXExt, 5);
+//    if (!gli::save_ktx(Texture, p_cOutFile)) {
+//        SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION, "Failed to write texture file: %s\n", p_cOutFile);
+//        return false;
+//    }
+//    return true;
+//}

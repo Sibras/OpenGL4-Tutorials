@@ -1,6 +1,6 @@
 #include "GLScene.h"
 // Using SDL
-#include <SDL.h>
+#include <SDL2/SDL.h>
 // Using Assimp
 #include <assimp/cimport.h>
 #include <assimp/scene.h>
@@ -184,7 +184,7 @@ bool GL_LoadScene(const char * p_cSceneFile, SceneData & SceneInfo)
     unsigned uiPathLength = 0;
     const char * p_cDirSlash = strrchr(p_cSceneFile, '/');
     if (p_cDirSlash != NULL) {
-        uiPathLength = p_cDirSlash - p_cSceneFile + 1;
+        uiPathLength = (unsigned)(p_cDirSlash - p_cSceneFile) + 1;
         strncat(p_cPath, p_cSceneFile, uiPathLength);
     }
     // Allocate buffers for each mesh

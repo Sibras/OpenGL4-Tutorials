@@ -1,8 +1,7 @@
 // Using GLEW, GLM and math headers
 #include <math.h>
 #include <glm/glm.hpp>
-#define GLEW_STATIC
-#include <GL\glew.h>
+#include <GL/glew.h>
 
 using namespace glm;
 

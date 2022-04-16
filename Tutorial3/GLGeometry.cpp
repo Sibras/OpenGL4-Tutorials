@@ -1,7 +1,6 @@
-#define GLEW_STATIC
-#include <GL\glew.h>
+#include <GL/glew.h>
 #include <math.h>
-#include <glm\glm.hpp>
+#include <glm/glm.hpp>
 using namespace glm;
 
 struct CustomVertex

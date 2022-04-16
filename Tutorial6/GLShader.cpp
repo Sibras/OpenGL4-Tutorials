@@ -1,8 +1,7 @@
 // Using SDL, GLEW
 #include <math.h>
-#define GLEW_STATIC
 #include <GL/glew.h>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
