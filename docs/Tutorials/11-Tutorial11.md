@@ -99,7 +99,7 @@ GLuint g_uiSSAOProgram2;
 ```glsl
 #version 430 core
  
-layout(binding = 1) uniform CameraData {
+layout(std140, binding = 1) uniform CameraData {
     mat4 m4ViewProjection;
     vec3 v3CameraPosition;
     mat4 m4InvViewProjection;
@@ -519,12 +519,12 @@ struct SpotLight {
     vec3 v3Falloff;
 };
 #define MAX_LIGHTS 16
-layout(binding = 1) uniform CameraData {
+layout(std140, binding = 1) uniform CameraData {
     mat4 m4ViewProjection;
     vec3 v3CameraPosition;
     mat4 m4InvViewProjection;
 };
-layout(binding = 5) uniform SpotLightData {
+layout(std140, binding = 5) uniform SpotLightData {
     SpotLight SpotLights[MAX_LIGHTS];
 };
 layout(binding = 6) uniform CameraShadowData {

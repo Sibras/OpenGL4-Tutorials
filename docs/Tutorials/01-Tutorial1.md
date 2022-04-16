@@ -58,15 +58,13 @@ used to find and expose all available GL functions.
     [http://glew.sourceforge.net/](http://glew.sourceforge.net/])
 
 GLEW provides 2 different library implementations; the first is the standard
-version while the second (postfixed with MX) provides support for multiple
-rendering contexts. Since for this and all future tutorials we will not be using
-multiple render contexts only the standard static "glew32s" library needs to be
+version while the second (postfixed with 's) is for static linking. For this and all future tutorials only the standard "glew32" library needs to be
 extracted.
 
 {:style="counter-reset: step-counter 3;"}
 4.  Extract the GLEW include folder into a location accessible by your code (can
-    be merged with the same include folder as SDL). Also extract the "glew32s"
-    library.
+    be merged with the same include folder as SDL). Also extract the "glew32"
+    library and binary.
 
 ## Part 2: Creating a window
 
@@ -75,14 +73,12 @@ the program.
 
 {:style="counter-reset: step-counter 4;"}
 4.  To use both SDL and GLEW the appropriate header files need to be added to
-    the source code. We define `GLEW_STATIC` to signal to GLEW that we are using
-    the static version of the library. The program also needs an entry point
+    the source code. The program also needs an entry point
     which can take various forms depending on what OS is being targeted.
 
 ```c++
-#define GLEW_STATIC
 #include <GL/glew.h>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #ifdef _WIN32
 #include <Windows.h>
 #endif

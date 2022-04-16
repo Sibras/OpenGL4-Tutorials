@@ -221,7 +221,7 @@ char * p_cPath = (char *)malloc(255);
 unsigned uiPathLength = 0;
 const char * p_cDirSlash = strrchr(p_cSceneFile, '/');
 if (p_cDirSlash != NULL) {
-    uiPathLength = p_cDirSlash - p_cSceneFile + 1;
+    uiPathLength = (unsigned)(p_cDirSlash - p_cSceneFile) + 1;;
     strncat(p_cPath, p_cSceneFile, uiPathLength);
 }
 ```

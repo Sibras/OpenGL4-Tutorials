@@ -215,7 +215,7 @@ lights brightness diminishes the further away from the light that you are.
     the values of a point light. Next we will then create a UBO input that
     contains a single instance of `PointLight` which we will use
     `layout(binding)` to bind it to the next available UBO location (in this
-    case ‘2’).
+    case ‘2’). In addition to setting the binding, we will also set `std140`. This is required whenever we use multiple `vec3`s in a single structure. Different OpenGL implementations on different hardware can align these `vec3`s differently (e.g. some may align on 16B while others will align 12B) which will result in data being in different locations in memory. To ensure the GPU code is consistent across hardware `std140` mandates a constant 16B alignment which we can use to ensure that our host code matches correctly.
 
 ```glsl
 struct PointLight {
@@ -223,7 +223,7 @@ struct PointLight {
     vec3 v3LightIntensity;
     float fFalloff;
 };
-layout(binding = 2) uniform PointLightData {
+layout(std140, binding = 2) uniform PointLightData {
     PointLight PointLights;
 };
 ```
@@ -262,7 +262,7 @@ $$\overrightarrow{\mathbf{h}} = \frac{\overrightarrow{\mathbf{v}} + \overrightar
     case ‘3’).
 
 ```glsl
-layout(binding = 3) uniform MaterialData {
+layout(std140, binding = 3) uniform MaterialData {
     vec3  v3DiffuseColour;
     vec3  v3SpecularColour;
     float fRoughness;
@@ -1060,7 +1060,7 @@ $$f_{\text{dist}}(r) = \frac{1}{k_{r0} + k_{r1}r + k_{r2}r^{2}}$$
 
 ```glsl
 #define MAX_LIGHTS 16
-layout(binding = 2) uniform PointLightData {
+layout(std140, binding = 2) uniform PointLightData {
     PointLight PointLights[MAX_LIGHTS];
 };
 layout(location = 0) uniform int iNumPointLights;

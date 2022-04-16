@@ -136,7 +136,7 @@ struct SpotLight {
     uses binding location 5 and the uniform uses location 2).
 
 ```glsl
-layout(binding = 5) uniform SpotLightData {
+layout(std140, binding = 5) uniform SpotLightData {
     SpotLight SpotLights[MAX_LIGHTS];
 };
 layout(location = 2) uniform int iNumSpotLights;
@@ -1038,7 +1038,7 @@ float random(in vec3 v3Seed, in float fFreq)
 
 ```glsl
 // Generate random rotation
-float fAngle = random(v3Position, 500f) * (M_PI * 2.0f);
+float fAngle = random(v3Position, 500.0f) * (M_PI * 2.0f);
 vec2 v2Rotate = vec2(sin(fAngle), cos(fAngle));
 ```
 
@@ -1196,7 +1196,7 @@ This requires creating a new UBO for both the point and spot lights that holds
 the position corresponding to each element in the viewProjection matrix array.
 
 ```glsl
-layout(binding = 9) uniform CameraShadowData2 {
+layout(std140, binding = 9) uniform CameraShadowData2 {
     vec3 v3PositionShadow[MAX_LIGHTS];
 };
 ```

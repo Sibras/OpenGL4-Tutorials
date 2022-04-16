@@ -710,15 +710,10 @@ and also allows for even more forms of texture compression.
 37.  To load compressed image data from external files we will create a new
     function `GL_LoadTextureKTX` which will function similarly to our existing
     texture load function. This function will use libktx to load the texture
-    file so it requires the appropriate include be added. In this tutorial we
-    will be focusing on desktop OpenGL functionality so before including the
-    header we must define `KTX_OPENGL` to 1. The library also supports different
-    OpenGL ES versions that can be requested by setting the appropriate define
-    instead.
+    file so it requires the appropriate include be added.
 
 ```c++
 // Using KTX import
-#define KTX_OPENGL 1
 #include <ktx.h>
 bool GL_LoadTextureKTX(GLuint uiTexture, const char * p_cTextureFile)
 {
@@ -728,33 +723,39 @@ bool GL_LoadTextureKTX(GLuint uiTexture, const char * p_cTextureFile)
 
 {:style="counter-reset: step-counter 37;"}
 38.  Loading a `.ktx` texture from file is as simple as using libktx’s inbuilt
-    `ktxLoadTextureN` function. This function will load the specified texture
+    `ktxTexture_CreateFromNamedFile` function. This function will load the specified texture
     file and then copy its contents directly into the passed in OpenGL texture
     ID (if the ID is 0 then the function will generate a new one for you). The
     textures settings will be automatically set based on the properties of the
     input file so if the input `.ktx` file uses compressed data then the
     appropriate settings will automatically be applied.
-    The `ktxLoadTextureN` function takes several other inputs that are used to
-    return additional texture information. The first of which returns the target
-    of the texture (i.e. Texture2D, Texture3D etc.), the second returns if the
-    file already contains mipmaps and the last returns any additional errors
-    that may have occurred within OpenGL when setting up the texture (as opposed
-    to errors found in the input file that are returned directly by the function
-    itself).
+    The `ktxTexture_CreateFromNamedFile` function takes an input that is used to
+    return a texture object that contains the relevant texture information. We can then use `ktxTexture_GLUpload` to upload the texture into OpenGL.
 
 ```c++
 // Load texture data
-GLenum GLTarget, GLError;
-GLboolean bIsMipmapped;
-KTX_error_code ktxerror = ktxLoadTextureN(p_cTextureFile, &uiTexture, &GLTarget, NULL, &bIsMipmapped, &GLError, 0, NULL);
+ktxTexture* kTexture;
+KTX_error_code ktxerror = ktxTexture_CreateFromNamedFile(p_cTextureFile,
+    KTX_TEXTURE_CREATE_NO_FLAGS,
+    &kTexture);
 if (ktxerror != KTX_SUCCESS) {
     SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION, "Failed to read texture file: %s (%s)\n", p_cTextureFile, ktxErrorString(ktxerror));
     return false;
 }
+
+// Upload texture file
+GLenum GLTarget, GLError;
+ktxerror = ktxTexture_GLUpload(kTexture, &uiTexture, &GLTarget, &GLError);
+if (ktxerror != KTX_SUCCESS) {
+    SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION, "Failed to upload texture file: %s\n", ktxErrorString(ktxerror));
+    return false;
+}
  
 // Generate mipmaps
-if (!bIsMipmapped)
+if (kTexture->numLevels == 1)
     glGenerateMipmap(GL_TEXTURE_2D);
+
+ktxTexture_Destroy(kTexture);
  
 // Initialise the texture filtering values
    ...
