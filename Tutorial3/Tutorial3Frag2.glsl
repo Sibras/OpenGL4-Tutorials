@@ -10,11 +10,11 @@ struct PointLight {
     vec3 v3Falloff;
 };
 #define MAX_LIGHTS 16
-layout(binding = 2) uniform PointLightData {
+layout(std140, binding = 2) uniform PointLightData {
     PointLight PointLights[MAX_LIGHTS];
 };
 layout(location = 0) uniform int iNumPointLights;
-layout(binding = 3) uniform MaterialData {
+layout(std140, binding = 3) uniform MaterialData {
     vec3  v3DiffuseColour;
     vec3  v3SpecularColour;
     float fRoughness;

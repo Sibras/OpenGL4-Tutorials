@@ -1,6 +1,6 @@
 #version 430 core
 
-layout(binding = 1) uniform CameraData {
+layout(std140, binding = 1) uniform CameraData {
     mat4 m4ViewProjection;
     vec3 v3CameraPosition;
     mat4 m4InvViewProjection;

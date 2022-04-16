@@ -18,13 +18,13 @@ layout(binding = 1) uniform CameraData {
     mat4 m4ViewProjection;
     vec3 v3CameraPosition;
 };
-layout(binding = 2) uniform PointLightData {
+layout(std140, binding = 2) uniform PointLightData {
     PointLight PointLights[MAX_LIGHTS];
 };
 layout(binding = 3) uniform ReflectPlaneData {
     mat4 m4ReflectVP;
 };
-layout(binding = 5) uniform SpotLightData {
+layout(std140, binding = 5) uniform SpotLightData {
     SpotLight SpotLights[MAX_LIGHTS];
 };
 layout(binding = 6) uniform CameraShadowData {

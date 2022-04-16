@@ -4,7 +4,7 @@
 layout(binding = 6) uniform CameraShadowData {
     mat4 m4ViewProjectionShadow[MAX_LIGHTS];
 };
-layout(binding = 9) uniform CameraShadowData2 {
+layout(std140, binding = 9) uniform CameraShadowData2 {
     vec3 v3PositionShadow[MAX_LIGHTS];
 };
 

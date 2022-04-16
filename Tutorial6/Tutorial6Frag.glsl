@@ -10,7 +10,7 @@ layout(binding = 1) uniform CameraData {
     mat4 m4ViewProjection;
     vec3 v3CameraPosition;
 };
-layout(binding = 2) uniform PointLightData {
+layout(std140, binding = 2) uniform PointLightData {
     PointLight PointLights[MAX_LIGHTS];
 };
 layout(binding = 3) uniform ReflectPlaneData {

@@ -12,7 +12,7 @@ layout(binding = 11) uniform sampler2D s2DepthTexture;
 layout(binding = 12) uniform sampler2D s2NormalTexture;
 layout(binding = 13) uniform sampler2D s2DiffuseTexture;
 layout(binding = 14) uniform sampler2D s2SpecularRoughTexture;
-layout(binding = 1) uniform CameraData {
+layout(std140, binding = 1) uniform CameraData {
     mat4 m4ViewProjection;
     vec3 v3CameraPosition;
     mat4 m4InvViewProjection;

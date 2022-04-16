@@ -13,11 +13,11 @@ struct PointLight {
     vec3 v3Falloff;
 };
 #define MAX_LIGHTS 16
-layout(binding = 2) uniform PointLightData {
+layout(std140, binding = 2) uniform PointLightData {
     PointLight PointLights[MAX_LIGHTS];
 };
 layout(location = 0) uniform int iNumPointLights;
-layout(binding = 3) uniform MaterialData {
+layout(std140, binding = 3) uniform MaterialData {
     vec3  v3DiffuseColour;
     vec3  v3SpecularColour;
     float fRoughness;
@@ -51,7 +51,7 @@ vec3 blinnPhong(in vec3 v3Normal, in vec3 v3LightDirection, in vec3 v3ViewDirect
     vec3 v3HalfVector = normalize(v3ViewDirection + v3LightDirection);
 
     // Convert roughness to Phong shininess
-    float fRoughnessPhong = (2.0 / (fRoughness * fRoughness)) - 2.0f;
+    float fRoughnessPhong = (2.0f / (fRoughness * fRoughness)) - 2.0f;
 
     // Calculate specular component
     vec3 v3Specular = pow(max(dot(v3Normal, v3HalfVector), 0.0f), fRoughnessPhong) * v3SpecularColour;

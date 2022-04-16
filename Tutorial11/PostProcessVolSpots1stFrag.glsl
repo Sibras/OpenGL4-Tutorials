@@ -9,12 +9,12 @@ struct SpotLight {
     float fFalloffDist;
 };
 #define MAX_LIGHTS 16
-layout(binding = 1) uniform CameraData {
+layout(std140, binding = 1) uniform CameraData {
     mat4 m4ViewProjection;
     vec3 v3CameraPosition;
     mat4 m4InvViewProjection;
 };
-layout(binding = 5) uniform SpotLightData {
+layout(std140) layout(binding = 5) uniform SpotLightData {
     SpotLight SpotLights[MAX_LIGHTS];
 };
 layout(binding = 6) uniform CameraShadowData {
